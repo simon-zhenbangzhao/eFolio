@@ -40,7 +40,8 @@ const errors = ref({
   confirmPassword: null,
   resident: null,
   gender: null,
-  reason: null
+  reason: null,
+  reasonSuccess: null
 })
 
 const validateName = (blur) => {
@@ -83,6 +84,19 @@ const validateConfirmPassword = (blur) => {
     if (blur) errors.value.confirmPassword = 'Passwords do not match.'
   } else {
     errors.value.confirmPassword = null
+  }
+}
+
+/**
+ * Reason validation function that checks if the reason text contains the word 'friend'.
+ * @param blur: boolean - If true, the function will display a success message if 'friend' is found.
+ */
+const validateReason = (blur) => {
+  const reason = formData.value.reason.toLowerCase()
+  if (reason.includes('friend')) {
+    if (blur) errors.value.reasonSuccess = 'Great to have a friend'
+  } else {
+    errors.value.reasonSuccess = null
   }
 }
 </script>
@@ -168,7 +182,11 @@ const validateConfirmPassword = (blur) => {
               id="reason"
               rows="3"
               v-model="formData.reason"
+              @input="() => validateReason(true)"
             ></textarea>
+            <div v-if="errors.reasonSuccess" class="text-success mt-2">
+              {{ errors.reasonSuccess }}
+            </div>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
