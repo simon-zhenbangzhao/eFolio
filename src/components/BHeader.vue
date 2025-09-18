@@ -12,6 +12,12 @@
         <li class="nav-item">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/firebase-signin" class="nav-link" active-class="active">Firebase Login</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/firebase-register" class="nav-link" active-class="active">Firebase Register</router-link>
+        </li>
         <li class="nav-item"><a href="#" class="nav-link">Contact us</a></li>
       </ul>
     </header>

@@ -6,6 +6,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+// Initialize Firebase
+import './firebase'
+
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
 // import DataTable from 'primevue/datatable'
