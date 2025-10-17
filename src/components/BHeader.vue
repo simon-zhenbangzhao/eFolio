@@ -18,6 +18,18 @@
         <li class="nav-item">
           <router-link to="/firebase-register" class="nav-link" active-class="active">Firebase Register</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/add-book" class="nav-link" active-class="active">Add Book</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/get-book-count" class="nav-link" active-class="active">Book Count</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/WeatherCheck" class="nav-link" active-class="active">Get Weather</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/CountBookAPI" class="nav-link" active-class="active">Book API</router-link>
+        </li>
         <li class="nav-item"><a href="#" class="nav-link">Contact us</a></li>
       </ul>
     </header>
