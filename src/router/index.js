@@ -13,6 +13,7 @@ import AuthorsTableView from '../views/AuthorsTableView.vue'
 import BooksTableView from '../views/BooksTableView.vue'
 import MapView from '../views/MapView.vue'
 import ExportDataView from '../views/ExportDataView.vue'
+import AIAssistantView from '../views/AIAssistantView.vue'
 
 const routes = [
   {
@@ -82,6 +83,11 @@ const routes = [
     path: '/export',
     name: 'Export',
     component: ExportDataView
+  },
+  {
+    path: '/ai-assistant',
+    name: 'AIAssistant',
+    component: AIAssistantView
   }
 ]
 

@@ -58,6 +58,9 @@ const handleLogout = async () => {
         <li class="nav-item">
           <router-link to="/export" class="nav-link" active-class="active">Export</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/ai-assistant" class="nav-link" active-class="active">AI Assistant</router-link>
+        </li>
       </ul>
 
       <!-- User authentication section -->
