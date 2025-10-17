@@ -9,6 +9,8 @@ import GetBookCountView from '../views/GetBookCountView.vue'
 import WeatherView from '../views/WeatherView.vue'
 import CountBookAPI from '../views/CountBookAPI.vue'
 import SendEmailView from '../views/SendEmailView.vue'
+import AuthorsTableView from '../views/AuthorsTableView.vue'
+import BooksTableView from '../views/BooksTableView.vue'
 
 const routes = [
   {
@@ -58,6 +60,16 @@ const routes = [
     name: 'SendEmail',
     component: SendEmailView,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/authors-table',
+    name: 'AuthorsTable',
+    component: AuthorsTableView
+  },
+  {
+    path: '/books-table',
+    name: 'BooksTable',
+    component: BooksTableView
   }
 ]
 
