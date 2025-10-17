@@ -11,6 +11,7 @@ import CountBookAPI from '../views/CountBookAPI.vue'
 import SendEmailView from '../views/SendEmailView.vue'
 import AuthorsTableView from '../views/AuthorsTableView.vue'
 import BooksTableView from '../views/BooksTableView.vue'
+import MapView from '../views/MapView.vue'
 
 const routes = [
   {
@@ -70,6 +71,11 @@ const routes = [
     path: '/books-table',
     name: 'BooksTable',
     component: BooksTableView
+  },
+  {
+    path: '/map',
+    name: 'Map',
+    component: MapView
   }
 ]
 

@@ -52,6 +52,9 @@ const handleLogout = async () => {
         <li class="nav-item">
           <router-link to="/books-table" class="nav-link" active-class="active">Books</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/map" class="nav-link" active-class="active">Map</router-link>
+        </li>
       </ul>
 
       <!-- User authentication section -->
