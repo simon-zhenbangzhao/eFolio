@@ -1,40 +1,33 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
+import { ref } from 'vue'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useRouter } from 'vue-router'
 
 const email = ref('')
 const password = ref('')
-const user = ref(null)
 const message = ref('')
+const isLoading = ref(false)
 const auth = getAuth()
+const router = useRouter()
 
+// Login function with navigation
 const login = async () => {
+  if (!email.value || !password.value) {
+    message.value = 'Please enter both email and password'
+    return
+  }
+
+  isLoading.value = true
+  message.value = ''
+
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value)
-    user.value = userCredential.user
-    message.value = 'Login successful!'
+    await signInWithEmailAndPassword(auth, email.value, password.value)
+    // Redirect to home page after successful login
+    router.push('/')
   } catch (error) {
     message.value = 'Login failed: ' + error.message
-  }
-}
-
-// Monitor authentication state
-onMounted(() => {
-  onAuthStateChanged(auth, (currentUser) => {
-    user.value = currentUser
-    if (currentUser) {
-      console.log('Current user:', currentUser)
-    }
-  })
-})
-
-const logout = async () => {
-  try {
-    await auth.signOut()
-    user.value = null
-    message.value = 'Logged out successfully'
-  } catch (error) {
-    message.value = 'Logout failed: ' + error.message
+  } finally {
+    isLoading.value = false
   }
 }
 </script>
@@ -43,43 +36,59 @@ const logout = async () => {
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-6 offset-md-3">
-        <h1 class="text-center">Firebase Sign In</h1>
-        
-        <div v-if="user" class="text-center">
-          <h3>Welcome, {{ user.email }}!</h3>
-          <button @click="logout" class="btn btn-danger">Logout</button>
-        </div>
-        
-        <div v-else>
-          <form @submit.prevent>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input 
-                type="email" 
-                class="form-control" 
-                id="email" 
-                v-model="email"
-                required
-              >
+        <div class="card">
+          <div class="card-body p-5">
+            <h2 class="text-center mb-4">Sign In</h2>
+            
+            <form @submit.prevent="login">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="email" 
+                  v-model="email"
+                  placeholder="Enter your email"
+                  required
+                  :disabled="isLoading"
+                >
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input 
+                  type="password" 
+                  class="form-control" 
+                  id="password" 
+                  v-model="password"
+                  placeholder="Enter your password"
+                  required
+                  :disabled="isLoading"
+                >
+              </div>
+              
+              <div v-if="message" class="alert alert-danger" role="alert">
+                {{ message }}
+              </div>
+              
+              <div class="d-grid">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary btn-lg"
+                  :disabled="isLoading"
+                >
+                  <span v-if="isLoading">Signing in...</span>
+                  <span v-else>Sign In</span>
+                </button>
+              </div>
+            </form>
+            
+            <div class="text-center mt-3">
+              <p class="text-muted">
+                Don't have an account? 
+                <router-link to="/firebase-register" class="text-decoration-none">Register here</router-link>
+              </p>
             </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input 
-                type="password" 
-                class="form-control" 
-                id="password" 
-                v-model="password"
-                required
-              >
-            </div>
-            <div class="text-center">
-              <button @click="login" class="btn btn-primary">Sign In</button>
-            </div>
-          </form>
-        </div>
-        
-        <div v-if="message" class="alert alert-info mt-3 text-center">
-          {{ message }}
+          </div>
         </div>
       </div>
     </div>
@@ -87,5 +96,9 @@ const logout = async () => {
 </template>
 
 <style scoped>
-/* 简单样式 */
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 10px;
+}
 </style>

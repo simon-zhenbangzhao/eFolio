@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getAuth } from 'firebase/auth'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import FirebaseSigninView from '../views/FirebaseSigninView.vue'
@@ -32,12 +33,14 @@ const routes = [
   {
     path: '/add-book',
     name: 'AddBook',
-    component: AddBookView
+    component: AddBookView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/get-book-count',
     name: 'GetBookCount',
-    component: GetBookCountView
+    component: GetBookCountView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/WeatherCheck',
@@ -54,6 +57,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// Navigation guard to protect routes that require authentication
+router.beforeEach((to, from, next) => {
+  const auth = getAuth()
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const isAuthenticated = auth.currentUser
+
+  if (requiresAuth && !isAuthenticated) {
+    // Redirect to login page if route requires auth and user is not authenticated
+    next('/firebase-signin')
+  } else {
+    next()
+  }
 })
 
 export default router

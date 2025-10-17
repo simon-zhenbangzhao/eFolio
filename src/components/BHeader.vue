@@ -1,22 +1,35 @@
+<script setup>
+import { getAuth, signOut } from 'firebase/auth'
+import { useRouter } from 'vue-router'
+import { currentUser, isAuthenticated } from '../services/authService'
+
+const router = useRouter()
+const auth = getAuth()
+
+// Logout function
+const handleLogout = async () => {
+  try {
+    await signOut(auth)
+    router.push('/firebase-signin')
+  } catch (error) {
+    console.error('Logout error:', error)
+  }
+}
+</script>
+
 <template>
   <!-- Using Bootstrap's Header template (starter code) -->
   <!-- https://getbootstrap.com/docs/5.0/examples/headers/ -->
   <div class="container">
-    <header class="d-flex justify-content-center py-3">
+    <header class="d-flex justify-content-between align-items-center py-3">
       <ul class="nav nav-pills">
         <li class="nav-item">
           <router-link to="/" class="nav-link" active-class="active" aria-current="page"
-            >Home (Week 5)</router-link
+            >Home</router-link
           >
         </li>
         <li class="nav-item">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/firebase-signin" class="nav-link" active-class="active">Firebase Login</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/firebase-register" class="nav-link" active-class="active">Firebase Register</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/add-book" class="nav-link" active-class="active">Add Book</router-link>
@@ -25,50 +38,46 @@
           <router-link to="/get-book-count" class="nav-link" active-class="active">Book Count</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/WeatherCheck" class="nav-link" active-class="active">Get Weather</router-link>
+          <router-link to="/WeatherCheck" class="nav-link" active-class="active">Weather</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/CountBookAPI" class="nav-link" active-class="active">Book API</router-link>
         </li>
-        <li class="nav-item"><a href="#" class="nav-link">Contact us</a></li>
       </ul>
+
+      <!-- User authentication section -->
+      <div class="auth-section">
+        <div v-if="isAuthenticated" class="user-info">
+          <span class="user-email">{{ currentUser?.email }}</span>
+          <button @click="handleLogout" class="btn btn-sm btn-outline-danger ms-2">Logout</button>
+        </div>
+        <div v-else class="auth-links">
+          <router-link to="/firebase-signin" class="btn btn-sm btn-outline-primary me-2">Login</router-link>
+          <router-link to="/firebase-register" class="btn btn-sm btn-primary">Register</router-link>
+        </div>
+      </div>
     </header>
   </div>
 </template>
 
 <style scoped>
-.b-example-divider {
-  height: 3rem;
-  background-color: rgba(0, 0, 0, 0.1);
-  border: solid rgba(0, 0, 0, 0.15);
-  border-width: 1px 0;
-  box-shadow:
-    inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
-    inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+.auth-section {
+  display: flex;
+  align-items: center;
 }
 
-.form-control-dark {
-  color: #fff;
-  background-color: var(--bs-dark);
-  border-color: var(--bs-gray);
-}
-.form-control-dark:focus {
-  color: #fff;
-  background-color: var(--bs-dark);
-  border-color: #fff;
-  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+.user-info {
+  display: flex;
+  align-items: center;
 }
 
-.bi {
-  vertical-align: -0.125em;
-  fill: currentColor;
+.user-email {
+  font-size: 0.9rem;
+  color: #666;
 }
 
-.text-small {
-  font-size: 85%;
-}
-
-.dropdown-toggle {
-  outline: 0;
+.auth-links {
+  display: flex;
+  gap: 0.5rem;
 }
 </style>
