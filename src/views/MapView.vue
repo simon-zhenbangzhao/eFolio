@@ -259,7 +259,7 @@ onUnmounted(() => {
   <div class="container mt-5">
     <div class="row">
       <div class="col-12">
-        <h1 class="text-center mb-4">📍 Bookstore Map Navigation</h1>
+        <h1 class="text-center mb-4">Bookstore Map Navigation</h1>
         <p class="text-center text-muted">
           Geolocation features powered by AMap API - Search bookstores, view locations, plan routes
         </p>
@@ -271,7 +271,7 @@ onUnmounted(() => {
       <div class="col-md-4">
         <div class="card mb-3">
           <div class="card-header">
-            <h5 class="mb-0">🔍 Search Bookstores</h5>
+            <h5 class="mb-0">Search Bookstores</h5>
           </div>
           <div class="card-body">
             <div class="input-group mb-3">
@@ -289,7 +289,7 @@ onUnmounted(() => {
 
         <div class="card mb-3">
           <div class="card-header">
-            <h5 class="mb-0">📚 Bookstore List ({{ filteredStores.length }})</h5>
+            <h5 class="mb-0">Bookstore List ({{ filteredStores.length }})</h5>
           </div>
           <div class="card-body store-list">
             <div
@@ -314,7 +314,7 @@ onUnmounted(() => {
         <!-- Selected store information -->
         <div v-if="selectedStore" class="card mb-3">
           <div class="card-header bg-success text-white">
-            <h5 class="mb-0">✓ Selected Bookstore</h5>
+            <h5 class="mb-0">Selected Bookstore</h5>
           </div>
           <div class="card-body">
             <h6>{{ selectedStore.name }}</h6>
@@ -325,7 +325,7 @@ onUnmounted(() => {
                   <span class="spinner-border spinner-border-sm me-2"></span>
                   Planning...
                 </span>
-                <span v-else>🚗 Plan Route</span>
+                <span v-else>Plan Route</span>
               </button>
               <button class="btn btn-outline-secondary" @click="clearRoute">Clear Route</button>
             </div>
@@ -335,7 +335,7 @@ onUnmounted(() => {
         <!-- Route information -->
         <div v-if="routeInfo" class="card mb-3">
           <div class="card-header bg-info text-white">
-            <h5 class="mb-0">🛣️ Route Information</h5>
+            <h5 class="mb-0">Route Information</h5>
           </div>
           <div class="card-body">
             <div class="route-info-item">
@@ -369,48 +369,10 @@ onUnmounted(() => {
         <!-- Route details panel -->
         <div v-if="routeInfo" class="card mt-3">
           <div class="card-header">
-            <h5 class="mb-0">📋 Detailed Route Instructions</h5>
+            <h5 class="mb-0">Detailed Route Instructions</h5>
           </div>
           <div class="card-body">
             <div id="route-panel" style="max-height: 300px; overflow-y: auto"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Feature description -->
-    <div class="row mt-4">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="mb-0">💡 Feature Description</h5>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-4">
-                <h6>🔍 Smart Search</h6>
-                <p class="small text-muted">
-                  Quickly find bookstores by name, address, or description with real-time filtering
-                </p>
-              </div>
-              <div class="col-md-4">
-                <h6>📍 Location Markers</h6>
-                <p class="small text-muted">
-                  Display all bookstore locations on the map, click markers or list items for details
-                </p>
-              </div>
-              <div class="col-md-4">
-                <h6>🚗 Route Planning</h6>
-                <p class="small text-muted">
-                  Smart route planning from current location to selected bookstore with distance, time, and detailed steps
-                </p>
-              </div>
-            </div>
-            <hr />
-            <p class="mb-0 small text-muted">
-              <strong>Technologies Used:</strong> AMap API v2.0 | Geolocation API | Driving Route Planning
-              | POI Search | Custom Markers
-            </p>
           </div>
         </div>
       </div>

@@ -35,9 +35,7 @@ const columns = [
 <template>
   <div class="container mt-5">
     <div class="header-section mb-4">
-      <h2>
-        <i class="bi bi-book-fill"></i> Books Collection
-      </h2>
+      <h2>Books Collection</h2>
       <p class="text-muted">
         Explore our extensive book collection. Sort by any column, search by title, author, year, or genre.
         Each page displays 10 books for easy navigation.

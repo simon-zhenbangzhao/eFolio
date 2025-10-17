@@ -12,6 +12,7 @@ import SendEmailView from '../views/SendEmailView.vue'
 import AuthorsTableView from '../views/AuthorsTableView.vue'
 import BooksTableView from '../views/BooksTableView.vue'
 import MapView from '../views/MapView.vue'
+import ExportDataView from '../views/ExportDataView.vue'
 
 const routes = [
   {
@@ -76,6 +77,11 @@ const routes = [
     path: '/map',
     name: 'Map',
     component: MapView
+  },
+  {
+    path: '/export',
+    name: 'Export',
+    component: ExportDataView
   }
 ]
 
