@@ -43,6 +43,9 @@ const handleLogout = async () => {
         <li class="nav-item">
           <router-link to="/CountBookAPI" class="nav-link" active-class="active">Book API</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/send-email" class="nav-link" active-class="active">Send Email</router-link>
+        </li>
       </ul>
 
       <!-- User authentication section -->
